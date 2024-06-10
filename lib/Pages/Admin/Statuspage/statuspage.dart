@@ -52,7 +52,7 @@ class _MyStatusPageAdminState extends State<MyStatusPageAdmin> {
                   ],
                 ),
                 onTap: () {
-                  if (manuscript['status'] == 'Ditunggu') {
+                  if (manuscript['status'] == 'Ditunggu' || manuscript['status'] == 'Menunggu Pembayaran') {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

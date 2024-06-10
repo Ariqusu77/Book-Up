@@ -8,6 +8,21 @@ class MyFeedbackPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> months = [
+      '',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
     final TextEditingController feedbackController = TextEditingController();
 
     return Scaffold(
@@ -44,8 +59,10 @@ class MyFeedbackPage extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Umpan balik berhasil dikirim')),
                 );
-                manuscript['date'] = "${DateTime.now().day} ${DateTime.now().month}";
+                manuscript['date'] =
+                    "${DateTime.now().day} ${months[DateTime.now().month]} ${DateTime.now().year}";
                 manuscript['status'] = 'Ditolak';
+                manuscript['feedback'] = feedbackController.text;
                 putData(manuscript['key'], manuscript);
                 Navigator.pop(context);
               },

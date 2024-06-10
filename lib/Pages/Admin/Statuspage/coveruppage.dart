@@ -20,6 +20,22 @@ class _CoverUploadPageState extends State<CoverUploadPage> {
   String? _path;
   String urlDownload = '';
 
+  final List<String> months = [
+    '',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+
   void _openFileExplorer() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -37,8 +53,8 @@ class _CoverUploadPageState extends State<CoverUploadPage> {
   }
 
   Future<void> _uploadFile(File file, String filename) async {
-    var url = Uri.parse(
-        'https://firebasestorage.googleapis.com/v0/b/joki-client-server.appspot.com/o?name=cover/$filename');
+    var url = Uri.parse(// gs://client-and-server.appspot.com
+        'https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o?name=cover/$filename');
 
     var request = http.MultipartRequest('POST', url)
       ..files.add(http.MultipartFile(
@@ -127,9 +143,10 @@ class _CoverUploadPageState extends State<CoverUploadPage> {
                   const SnackBar(content: Text('Cover berhasil diupload')),
                 );
                 widget.manuscript['date'] =
-                    "${DateTime.now().day} ${DateTime.now().month}";
+                    "${DateTime.now().day} ${months[DateTime.now().month]} ${DateTime.now().year}";
                 widget.manuscript['status'] = 'Diterima';
                 widget.manuscript['coverUrl'] = urlDownload;
+                widget.manuscript['cover'] = _fileName;
                 putData(widget.manuscript['key'], widget.manuscript);
                 Navigator.pop(context);
               },

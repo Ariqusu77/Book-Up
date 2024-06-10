@@ -19,7 +19,7 @@ class MyProfilePageUser extends StatelessWidget {
                 width: 100,
                 height: 100,
                 child: Image.network(
-                  'images/wall.jpg', // Ubah sesuai dengan URL gambar profil Anda
+                  'https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/asset%2Fwall.jpg?alt=media&token=94bb63ac-7996-4ff7-8a1a-2e7359d0e937', // Ubah sesuai dengan URL gambar profil Anda
                   fit: BoxFit.cover,
                 ),
               ),

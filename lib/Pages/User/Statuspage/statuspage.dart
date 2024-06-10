@@ -1,3 +1,5 @@
+import 'package:appclient/Pages/User/Statuspage/editpage.dart';
+import 'package:appclient/Pages/User/Statuspage/paymentpage.dart';
 import 'package:flutter/material.dart';
 import 'package:appclient/Model/manuscript.dart';
 
@@ -22,17 +24,28 @@ class _MyStatusPageUserState extends State<MyStatusPageUser> {
     });
   }
 
-  void _navigateToAccepted(BuildContext context) {
+  void _navigateToAccepted(
+      BuildContext context, Map<String, dynamic> manuscript) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const MyAcceptedPageUser()),
+      MaterialPageRoute(
+          builder: (context) => MyAcceptedPageUser(manuscript: manuscript)),
     );
   }
 
-  void _navigateToRejected(BuildContext context) {
+  void _navigateToPayment(
+      BuildContext context, Map<String, dynamic> manuscript) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const MyRejectedPageUser()),
+      MaterialPageRoute(
+          builder: (context) => MyPaymentPageUser(manuscript: manuscript)),
+    );
+  }
+
+  void _navigateToRejected(BuildContext context, Map<String, dynamic> manuscript) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyRejectedPageUser(manuscript: manuscript)),
     );
   }
 
@@ -48,9 +61,9 @@ class _MyStatusPageUserState extends State<MyStatusPageUser> {
         'status': "Ditunggu",
         'year': newManuscript['year'],
         'author': newManuscript['author'],
-        'feedback' : '',
-        'contentUrl' : newManuscript['contentUrl'],
-        'coverUrl' : '',
+        'feedback': '',
+        'contentUrl': newManuscript['contentUrl'],
+        'coverUrl': '',
       });
       _refresh();
     }
@@ -60,7 +73,7 @@ class _MyStatusPageUserState extends State<MyStatusPageUser> {
       BuildContext context, Map<String, dynamic> manuscript) async {
     final newManuscript = await Navigator.push<Map<String, String>>(
       context,
-      MaterialPageRoute(builder: (context) => const MyUploadPageUser()),
+      MaterialPageRoute(builder: (context) => MyEditPageUser(manuscript: manuscript)),
     );
     if (newManuscript != null) {
       manuscript['title'] = newManuscript['title'];
@@ -162,7 +175,7 @@ class _MyStatusPageUserState extends State<MyStatusPageUser> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    if (manuscript['status'] != 'Diterima')
+                    if (manuscript['status'] == 'Ditolak' || manuscript['status'] == 'Ditunggu')
                       ElevatedButton.icon(
                           onPressed: () {
                             _navigateToEdit(context, manuscript);
@@ -210,10 +223,18 @@ class _MyStatusPageUserState extends State<MyStatusPageUser> {
                         : Colors.orange;
                 Function(BuildContext) onTap;
                 if (manuscript['status'] == 'Diterima') {
-                  onTap = _navigateToAccepted;
+                  onTap = (context) {
+                    _navigateToAccepted(context, manuscript);
+                  };
                 } else if (manuscript['status'] == 'Ditolak') {
-                  onTap = _navigateToRejected;
-                } else {
+                  onTap = (context) {
+                    _navigateToRejected(context, manuscript);
+                  };
+                } else if (manuscript['status'] == 'Menunggu Pembayaran') {
+                  onTap = (context) {
+                    _navigateToPayment(context, manuscript);
+                  };
+                }else {
                   onTap = (context) {};
                 }
                 return _buildStatusItem(

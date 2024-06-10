@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'coveruppage.dart';
 import 'feedbackpage.dart';
+import 'package:appclient/Model/manuscript.dart';
 
 class MyManuscriptDetailPage extends StatelessWidget {
   final Map<String, dynamic> manuscript;
@@ -72,8 +73,29 @@ class MyManuscriptDetailPage extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 33, 243,
-                        124), // Mengubah warna latar belakang tombol menjadi biru
+                    backgroundColor: const Color.fromARGB(255, 56, 82,
+                        228), // Mengubah warna latar belakang tombol menjadi biru
+                  ),
+                  child: const Text(
+                    'Upload',
+                    style: TextStyle(
+                        color: Colors
+                            .white), // Mengubah warna teks tombol menjadi putih
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Menunggu Pembayaran Penulis')),
+                    );
+                    manuscript['status'] = 'Menunggu Pembayaran';
+                    putData(manuscript['key'], manuscript);
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 0, 170,
+                        73), // Mengubah warna latar belakang tombol menjadi biru
                   ),
                   child: const Text(
                     'Terima',

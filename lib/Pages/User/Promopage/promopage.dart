@@ -36,7 +36,7 @@ class MyPromoPageUser extends StatelessWidget {
                         ),
                       ],
                       image: const DecorationImage(
-                        image: AssetImage('images/banner5.jpg'),
+                        image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/asset%2Fbanner5.jpg?alt=media&token=14e6f013-3d20-4dea-806f-66c5ca90a027'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -88,13 +88,13 @@ class MyPromoPageUser extends StatelessWidget {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
-                        _buildPromoCard('images/promo1.jpg',
+                        _buildPromoCard('https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/asset%2Fpromo1.jpg?alt=media&token=6da9f32d-f15f-4870-b39f-8f1f2dc08054',
                             'Big Deals for You, up to 70% Off'),
                         _buildPromoCard(
-                            'images/promo2.jpg', 'Coming Soon "One Night"'),
-                        _buildPromoCard('images/promo3.jpg', 'Big Sale 50%'),
+                            'https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/asset%2Fpromo2.jpg?alt=media&token=1b6d806e-90bb-47f9-a84f-afedf6b57719', 'Coming Soon "One Night"'),
+                        _buildPromoCard('https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/asset%2Fpromo3.jpg?alt=media&token=2512a8ab-dde2-4f95-ab33-78226ec9a114', 'Big Sale 50%'),
                         _buildPromoCard(
-                            'images/promo4.jpg', 'Mega Sale Best Offer'),
+                            'https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/asset%2Fpromo4.jpg?alt=media&token=3e42b81e-f94f-41c0-8691-73191152c055', 'Mega Sale Best Offer'),
                       ],
                     ),
                   ),
@@ -131,7 +131,7 @@ class MyPromoPageUser extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               image: const DecorationImage(
-                                image: AssetImage('images/3.jpg'),
+                                image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/asset%2F3.jpg?alt=media&token=fcb8715d-832c-4d6e-a14e-d92305e0073e'),
                                 fit: BoxFit.cover,
                               ),
                             ),

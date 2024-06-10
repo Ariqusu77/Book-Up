@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-String? dataUrl = "https://joki-client-server-default-rtdb.firebaseio.com/Books";
+String? dataUrl = "https://client-and-server-default-rtdb.firebaseio.com/Books";
 
 List<Map<String, dynamic>> flattenJsonToList(Map<String, dynamic> jsonData) {
   List<Map<String, dynamic>> flattenedList = [];
@@ -17,7 +17,9 @@ List<Map<String, dynamic>> flattenJsonToList(Map<String, dynamic> jsonData) {
       'author' : value['author'],
       'feedback' : value['feedback'],
       'contentUrl' : value['contentUrl'],
+      'content' : value['content'],
       'coverUrl' : value['coverUrl'],
+      'cover' : value['cover'],
     };
     flattenedList.add(book);
   });
@@ -46,7 +48,8 @@ Future<Map<String, dynamic>?> getData() async {
   final response = await http.get(Uri.parse('$dataUrl.json'));
 
   if (response.statusCode == 200) {
-    return json.decode(response.body) as Map<String, dynamic>;
+    Map<String, dynamic> data = json.decode(response.body);
+    return data;
   } else {
     if (kDebugMode) {
       print('Failed to get data: ${response.statusCode}');

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyRejectedPageUser extends StatelessWidget {
-  const MyRejectedPageUser({super.key});
+  final Map<String, dynamic> manuscript;
+
+  const MyRejectedPageUser({super.key,required this.manuscript});
 
   @override
   Widget build(BuildContext context) {
@@ -24,30 +26,32 @@ class MyRejectedPageUser extends StatelessWidget {
                   height: 150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/dokumenkosong.png'),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/cover%2F${manuscript['cover']}?alt=media&token=${manuscript['coverUrl']}"
+                        ),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 const SizedBox(width: 16),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Monolog Rasa',
-                        style: TextStyle(
+                         manuscript['title'],
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
-                        'Della Dwi Agustin',
-                        style: TextStyle(fontSize: 16),
+                        manuscript['author'],
+                        style: const TextStyle(fontSize: 16),
                       ),
                       Text(
-                        '2024',
-                        style: TextStyle(fontSize: 16),
+                        manuscript['year'],
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
@@ -70,9 +74,9 @@ class MyRejectedPageUser extends StatelessWidget {
                     child: ListView(
                       children: [
                         _buildFeedbackBox(
-                            'Naskah Anda memiliki konsep yang menarik, namun kami merasa ada kekurangan dalam pengembangan tema utama. Kami sarankan untuk lebih fokus dalam membangun narasi.'),
-                        _buildFeedbackBox(
-                            'Kami menghargai usaha Anda dalam menulis, namun naskah ini tidak sesuai dengan kriteria penerbitan kami saat ini.'),
+                            manuscript['feedback']),
+                        // _buildFeedbackBox(
+                        //     'Kami menghargai usaha Anda dalam menulis, namun naskah ini tidak sesuai dengan kriteria penerbitan kami saat ini.'),
                         // Tambahkan lebih banyak umpan balik sesuai kebutuhan
                       ],
                     ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MyAcceptedPageUser extends StatelessWidget {
-  const MyAcceptedPageUser({super.key});
+  final Map<String, dynamic> manuscript;
+
+  const MyAcceptedPageUser({super.key,required this.manuscript});
 
   @override
   Widget build(BuildContext context) {
@@ -39,34 +40,34 @@ class MyAcceptedPageUser extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      image: const DecorationImage(
-                        image: AssetImage(
-                          'images/apdm.jpg',
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          "https://firebasestorage.googleapis.com/v0/b/client-and-server.appspot.com/o/cover%2F${manuscript['cover']}?alt=media&token=${manuscript['coverUrl']}"
                         ),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Antara Pulang Dan Merelakan',
-                          style: TextStyle(
+                          manuscript['title'],
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
-                          'Della Dwi Agustin',
-                          style: TextStyle(fontSize: 16),
+                          manuscript['author'],
+                          style: const TextStyle(fontSize: 16),
                         ),
                         Text(
-                          '2021',
-                          style: TextStyle(fontSize: 16),
+                          manuscript['year'],
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
@@ -80,38 +81,38 @@ class MyAcceptedPageUser extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    const url =
-                        'https://wa.me/+6289518464287'; // Ganti nomor WhatsApp dengan nomor tujuan Anda
-                    // ignore: deprecated_member_use
-                    if (await canLaunch(url)) {
-                      // ignore: deprecated_member_use
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                    backgroundColor: const Color.fromRGBO(44, 194, 209, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: const Text(
-                    'Berikutnya',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
+            // const Spacer(),
+            // Padding(
+            //   padding: const EdgeInsets.only(bottom: 16),
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: ElevatedButton(
+            //       onPressed: () async {
+            //         const url =
+            //             'https://wa.me/+6289518464287'; // Ganti nomor WhatsApp dengan nomor tujuan Anda
+            //         // ignore: deprecated_member_use
+            //         if (await canLaunch(url)) {
+            //           // ignore: deprecated_member_use
+            //           await launch(url);
+            //         } else {
+            //           throw 'Could not launch $url';
+            //         }
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         padding:
+            //             const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+            //         backgroundColor: const Color.fromRGBO(44, 194, 209, 1),
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(20),
+            //         ),
+            //       ),
+            //       child: const Text(
+            //         'Berikutnya',
+            //         style: TextStyle(fontSize: 16, color: Colors.white),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -5,17 +5,26 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 
-class MyUploadPageUser extends StatefulWidget {
-  const MyUploadPageUser({super.key});
+class MyEditPageUser extends StatefulWidget {
+  final Map<String, dynamic> manuscript;
+  const MyEditPageUser({super.key, required this.manuscript});
 
   @override
-  State<MyUploadPageUser> createState() => _MyUploadPageUserState();
+  State<MyEditPageUser> createState() => _MyEditPageUserState();
 }
 
-class _MyUploadPageUserState extends State<MyUploadPageUser> {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController dateController = TextEditingController();
-  final TextEditingController authorController = TextEditingController();
+class _MyEditPageUserState extends State<MyEditPageUser> {
+  late TextEditingController titleController;
+  late TextEditingController dateController;
+  late TextEditingController authorController;
+
+  @override
+  void initState() {
+    super.initState();
+    titleController = TextEditingController(text: widget.manuscript['title']);
+    dateController = TextEditingController(text: widget.manuscript['date']);
+    authorController = TextEditingController(text: widget.manuscript['author']);
+  }
 
   String _fileName = '';
   String? _path;
@@ -83,7 +92,7 @@ class _MyUploadPageUserState extends State<MyUploadPageUser> {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(
-              'Unggah',
+              'Edit Naskah',
               style: TextStyle(
                 fontFamily: 'Times New Roman',
                 fontSize: 20,
@@ -212,8 +221,8 @@ class _MyUploadPageUserState extends State<MyUploadPageUser> {
                       'date': dateController.text,
                       'author': authorController.text,
                       'year': DateTime.now().year.toString(),
-                      'contentUrl' : urlDownload,
-                      'content' : _fileName,
+                      'contentUrl': urlDownload,
+                      'content': _fileName,
                     });
                   },
                   style: ElevatedButton.styleFrom(
